@@ -1,0 +1,14 @@
+bootJar { enabled = false}
+jar {enabled = true}
+
+dependencies {
+	implementation libraries.guava
+	implementation libraries.commons_math3
+	implementation libraries.sboot_starter
+	implementation libraries.netty
+	implementation libraries.log4j
+	compileOnly libraries.lombok
+	developmentOnly libraries.sboot_starter_devtools
+	annotationProcessor libraries.projectlombok
+	testImplementation libraries.sboot_starter_test
+}

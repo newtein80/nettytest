@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        springBootVersion = '2.5.3'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+ext.libraries = [
+	guava: 'com.google.guava:guava:30.1-jre'
+	, commons_math3 : 'org.apache.commons:commons-math3:3.6.1'
+    , sboot_starter: 'org.springframework.boot:spring-boot-starter'
+    , sboot_starter_web: 'org.springframework.boot:spring-boot-starter-web'
+    , netty: 'io.netty:netty-all:4.1.66.Final'
+	, log4j: 'log4j:log4j:1.2.14'
+	, lombok: 'org.projectlombok:lombok'
+	, sboot_starter_devtools: 'org.springframework.boot:spring-boot-devtools'
+    , projectlombok: 'org.projectlombok:lombok'
+	, sboot_starter_test: 'org.springframework.boot:spring-boot-starter-test'
+]
+
+allprojects {
+    group 'com.park.netty.test'
+    version '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.11
+
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "https://raw.github.com/bnese/maven-repo-mibble/master/"
+        }
+    }
+}
+
+project(':lib') {
+}
+
+project(':netty-server') {
+	dependencies {
+        implementation project(':lib')
+    }
+}
+
+project(':netty-client') {
+	dependencies {
+        implementation project(':lib')
+    }
+}
